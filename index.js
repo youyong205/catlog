@@ -25,6 +25,7 @@
         for (var domain in sourceMap) {
             if (sourceMap.hasOwnProperty(domain) && ~host.indexOf(domain)) {
                 URL_PARAMS["cat_source"] = sourceMap[domain];
+                resetCookie = true;
             }
         }
 
@@ -179,7 +180,7 @@
                 dataQuery.push(key + "=" + encodeURIComponent(data[key]));
             }
         }
-        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send(dataQuery.join("&"));
     }
 
