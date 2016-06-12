@@ -1,10 +1,10 @@
 (function (global) {
     //set cat_source等参数的url
-    var SERVER_INIT_URL = "";
+    var SERVER_INIT_URL = "http://hello.dianping.com/cat-log-web/source";
     //set userId 的url
-    var SERVER_USER_ID_URL = "";
+    var SERVER_USER_ID_URL = "http://hello.dianping.com/cat-log-web/user";
     //打点请求url
-    var SERVER_LOG_URL = "";
+    var SERVER_LOG_URL = "http://hello.dianping.com/cat-log-web/web";
 
 
     //域名自动映射到cat_source
@@ -71,10 +71,10 @@
             /**
              * @param options{Object}
              * {
-             *  EventScreen:"", //默认值当前URL
-             *  EventAction:"",
-             *  EventLabel:"",
-             *  EventValue:""
+             *  EventScreen:"", //URL或App屏幕名称 , 可不传, 默认当前URL
+             *  EventAction:"", //例如“浏览”, “点击”, “焦点”(on-focus)等
+             *  EventLabel:"",  //按钮和控件的名称(只适于“点击”或“焦点”事件)
+             *  EventValue:""   //显示不同的内容值
              * }
              * */
             log: function (options) {
@@ -83,7 +83,26 @@
                 }
                 var params = mix(globalConfig, options);
                 request(SERVER_LOG_URL, params);
+            },
+
+            /**
+             *  EventScreen:"",  //URL或App屏幕名称 , 可不传, 默认当前URL
+             *  EventAction:"",  //例如“浏览”, “点击”, “焦点”(on-focus)等
+             *  EventLabel:"",   //按钮和控件的名称(只适于“点击”或“焦点”事件)
+             *  EventValue:""    //显示不同的内容值
+             * }
+             * */
+            trace: function(EventScreen,EventAction,EventLabel,EventValue){
+                var options = {};
+                options["EventScreen"]=EventScreen;
+                options["EventAction"]=EventAction;
+                options["EventLabel"]=EventLabel;
+                options["EventValue"]=EventValue;
+
+                var params = mix(globalConfig, options);
+                request(SERVER_LOG_URL, params);
             }
+
         };
     })();
 
