@@ -1,10 +1,10 @@
 (function (global) {
     //set cat_source等参数的url
-    var SERVER_INIT_URL = "http://hello.dianping.com/cat-log-web/source";
+    var SERVER_INIT_URL = "http://catio.infinitus.com.cn/cat-log-web/source";
     //set userId 的url
-    var SERVER_USER_ID_URL = "http://hello.dianping.com/cat-log-web/user";
+    var SERVER_USER_ID_URL = "http://catio.infinitus.com.cn/cat-log-web/user";
     //打点请求url
-    var SERVER_LOG_URL = "http://hello.dianping.com/cat-log-web/web";
+    var SERVER_LOG_URL = "http://catio.infinitus.com.cn/cat-log-web/web";
 
 
     //域名自动映射到cat_source
