@@ -24,12 +24,18 @@
     (function () {
         //预处理主逻辑
         var relog = false; //是否url有新参数,如果有,重新发
-        //1.域名隐射到cat_source
-        var host = location.host;
-        for (var domain in sourceMap) {
-            if (sourceMap.hasOwnProperty(domain) && ~host.indexOf(domain)) {
-                URL_PARAMS["cat_source"] = sourceMap[domain];
-                relog = true;
+        //1.document.referrer域名隐射到cat_source
+        var refer = document.referrer;
+        if (refer) {
+            var referHost = refer.match(/\/\/([^/$]+)/);
+            if (referHost && referHost[1]) {
+                referHost = referHost[1];
+                for (var domain in sourceMap) {
+                    if (sourceMap.hasOwnProperty(domain) && ~referHost.indexOf(domain)) {
+                        URL_PARAMS["cat_source"] = sourceMap[domain];
+                        relog = true;
+                    }
+                }
             }
         }
 
@@ -92,15 +98,13 @@
              *  EventValue:""    //显示不同的内容值
              * }
              * */
-            trace: function(EventScreen,EventAction,EventLabel,EventValue){
-                var options = {};
-                options["EventScreen"]=EventScreen;
-                options["EventAction"]=EventAction;
-                options["EventLabel"]=EventLabel;
-                options["EventValue"]=EventValue;
-
-                var params = mix(globalConfig, options);
-                request(SERVER_LOG_URL, params);
+            trace: function (EventScreen, EventAction, EventLabel, EventValue) {
+                this.log({
+                    EventScreen:EventScreen,
+                    EventAction:EventAction,
+                    EventLabel:EventLabel,
+                    EventValue:EventValue
+                });
             }
 
         };
