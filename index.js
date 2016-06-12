@@ -61,7 +61,7 @@
             setConfig: function (key, value) {
                 globalConfig[key] = value;
                 //userId 特殊处理
-                if (key === "userId") {
+                if (key === "UserID") {
                     request(SERVER_USER_ID_URL, {
                         userId: value
                     });
