@@ -8,7 +8,10 @@
 
     //根域名
     var ROOT_DOMAIN = ".infinitus.com.cn";
-
+    //cookie domain
+    var COOKIE_DOMAIN = "";
+    //cookie time
+    var COOKIE_EXPIRE = 1; //1d
 
     //域名自动映射到cat_source
     var sourceMap = {
@@ -31,10 +34,6 @@
         }
     }
 
-    //cookie domain
-    var COOKIE_DOMAIN = "";
-    //cookie time
-    var COOKIE_EXPIRE = 1; //1d
 
     (function () {
         //cookie domain
