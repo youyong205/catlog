@@ -1,8 +1,5 @@
 (function (global) {
-    //set cat_source等参数的url
-    var SERVER_INIT_URL = "http://hello.dianping.com/cat-log-web/source";
-    //set userId 的url
-    var SERVER_USER_ID_URL = "http://hello.dianping.com/cat-log-web/user";
+
     //打点请求url
     var SERVER_LOG_URL = "http://hello.dianping.com/cat-log-web/web";
 
