@@ -1,7 +1,7 @@
 (function (global) {
 
     //打点请求url
-    var SERVER_LOG_URL = "http://hello.dianping.com:2282/cat-log-web/web";
+    var SERVER_LOG_URL = "http://catio.infinitus.com.cn/cat-log-web/web";
 
     //根域名
     var ROOT_DOMAIN = ".infinitus.com.cn";
