@@ -1,14 +1,14 @@
 (function (global) {
 
     //打点请求url
-    var SERVER_LOG_URL = "http://hello.dianping.com/cat-log-web/web";
+    var SERVER_LOG_URL = "http://hello.dianping.com:2282/cat-log-web/web";
 
     //根域名
     var ROOT_DOMAIN = ".infinitus.com.cn";
     //cookie domain
     var COOKIE_DOMAIN = "";
     //cookie time
-    var COOKIE_EXPIRE = 1; //1d
+    var COOKIE_EXPIRE = 3650; //3650d
 
     //域名自动映射到cat_source
     var sourceMap = {
@@ -17,8 +17,8 @@
 
     //url参数自动解析到cookie
     var URL_COOKIE = ["cat_campaign", "cat_source", "cat_media", "cat_creative"];
-    var CAT_SESSION_ID = ['cat_session_id'];
-    var CAT_USER_ID = ['cat_user_id'];
+    var CAT_SESSION_ID = 'cat_session_id';
+    var CAT_USER_ID = 'cat_user_id';
 
     //params
     var URL_PARAMS = {};
@@ -75,9 +75,9 @@
         }
         //3.重置cookie
         if (relog) {
-            for (var name in urlParams) {
-                if (urlParams.hasOwnProperty(name)) {
-                    cookie(name, urlParams[name], {
+            for (var name in URL_PARAMS) {
+                if (URL_PARAMS.hasOwnProperty(name)) {
+                    cookie(name, URL_PARAMS[name], {
                         expires: COOKIE_EXPIRE,
                         domain: COOKIE_DOMAIN
                     });
@@ -94,6 +94,7 @@
         globalConfig[CAT_USER_ID] = cookie(CAT_USER_ID) || "";
 
         global.CatLog = {
+        	
             /**
              * 预设全局值,
              * 目前支持userId
@@ -108,6 +109,13 @@
                     });
                 }
             },
+            
+            setUserId:function(value){
+            	cookie(CAT_USER_ID, value, {
+                    expires: COOKIE_EXPIRE,
+                    domain: COOKIE_DOMAIN
+                });
+        	},
             /**
              * @param options{Object}
              * {
@@ -174,6 +182,7 @@
         }
 
         var currentSessionId = cookie(CAT_SESSION_ID);
+        
         if (!currentSessionId) {
             currentSessionId = sessionId();
         }
